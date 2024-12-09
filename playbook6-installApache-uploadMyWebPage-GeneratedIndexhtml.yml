@@ -1,0 +1,30 @@
+---
+- name:  Install Web Site
+  hosts: all
+  become: yes
+#  become_user: root
+#  become_method: sudo
+
+# вызываем нужную роль по её названию:
+  roles:
+#    - deploy_apache_web
+    - { role: deploy_apache_web, when: ansible_system == 'Linux' } # вызываем роль по условию
+
+
+
+   
+
+# instaliruet webserver Apache na host i zapuskaet ego i perezapuskaet
+# ansible-playbook playbook2-install-Apache.yml -b -k -K 
+
+#=========== В этом случае Ansible рекурсивно скопирует
+#=========== содержимое директории на управляющем компьютере
+#=========== в соответствующую директорию на удалённом:
+#- name: Copy directory to remote host
+#  copy:
+#    src: /home/ubuntu/local/directory/
+#    dest: /home/ubuntu/remote/directory/
+#    remote_src: yes
+
+#=========== команда инициирует роль с названием deploy_apache_web
+# ansible-galaxy init deploy_apache_web
